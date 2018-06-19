@@ -2,9 +2,11 @@ package com.mustansirzia.fused;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,6 +80,20 @@ public class FusedLocationModule extends ReactContextBaseJavaModule {
             case 3:
                 this.mLocationPriority = LocationRequest.PRIORITY_NO_POWER;
                 break;
+        }
+    }
+
+    @ReactMethod
+    public void openSettings() {
+        if (getCurrentActivity().getPackageName() != null) {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getCurrentActivity().getPackageName(), null);
+            intent.setData(uri);
+            getCurrentActivity().startActivity(intent);
+        }
+        else{
+            Log.e("foooooooo","packange is null");
         }
     }
 
@@ -264,8 +280,8 @@ public class FusedLocationModule extends ReactContextBaseJavaModule {
     }
 
     /*
-  * Internal function for communicating with JS
-  */
+     * Internal function for communicating with JS
+     */
     private void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
         if (reactContext.hasActiveCatalystInstance()) {
             reactContext
