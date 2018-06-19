@@ -4,8 +4,7 @@
 [![npm](https://img.shields.io/npm/dt/react-native-fused-location.svg)](https://www.npmjs.com/package/react-native-fused-location)
 [![Package Quality](http://npm.packagequality.com/shield/react-native-fused-location.svg)](http://packagequality.com/#?package=react-native-fused-location)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
-
-
+Change -> added open settings method to open app settings in case of never ask again permission
 Get the finest location on Android using <a href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi"> Fused </a> API. <br /> <br />
 I created this react native module with an inspiration that none of react native's location libraries use the newer Fused API to get location. According to google, it is the most accurate way to get location in an Android device and judges by itself when to use GPS or cell towers/wifi. Thus, it works with both.
 <br />
