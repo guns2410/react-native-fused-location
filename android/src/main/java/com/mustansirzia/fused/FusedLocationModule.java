@@ -26,6 +26,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.facebook.react.bridge.Callback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
@@ -95,6 +96,12 @@ public class FusedLocationModule extends ReactContextBaseJavaModule {
         else{
             Log.e("foooooooo","packange is null");
         }
+    } 
+
+    @ReactMethod
+    public void openLocationSettings() {
+            Intent viewIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            getCurrentActivity().startActivity(viewIntent);
     }
 
     @ReactMethod
@@ -222,8 +229,13 @@ public class FusedLocationModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @ReactMethod
-    public boolean areProvidersAvailable() {
+    
+     @ReactMethod
+    public void areProvidersAvailable(Callback  promise) {
+       promise.invoke(areProvidersAvailable());
+   }
+
+    private boolean areProvidersAvailable() {
         LocationManager lm = (LocationManager) getReactApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         try {
